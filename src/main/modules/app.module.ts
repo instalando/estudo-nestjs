@@ -4,6 +4,7 @@ import { AppService } from '@/data/services';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { databaseConfig } from '@/main/config/database';
+import { AuthModule, UserModule } from '@/main/modules';
 
 @Module({
   imports: [
@@ -15,7 +16,10 @@ import { databaseConfig } from '@/main/config/database';
         ! - otherwise you can lose production data.
       */
       synchronize: true,
+      entities: ['dist/domain/entities/*.js'],
     }),
+    AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
